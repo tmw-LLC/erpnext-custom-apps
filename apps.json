@@ -18,5 +18,13 @@
   {
     "url": "https://github.com/frappe/lending.git",
     "branch": "version-15"
+  },
+  {
+    "url": "https://github.com/frappe/health.git",
+    "branch": "version-15"
+  },
+  {
+    "url": "https://github.com/frappe/waba_integration.git",
+    "branch": "main"
   }
 ]
