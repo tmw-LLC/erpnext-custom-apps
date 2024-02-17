@@ -26,5 +26,9 @@
   {
     "url": "https://github.com/frappe/waba_integration.git",
     "branch": "main"
+  },
+    {
+    "url": "https://github.com/bhavesh95863/whitelabel.git",
+    "branch": "version-15"
   }
 ]
