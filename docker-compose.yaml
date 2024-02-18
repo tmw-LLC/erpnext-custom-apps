@@ -2,7 +2,7 @@ version: "3"
 
 services:
   backend:
-    image: 89neuron/erpnext_hrms_payments:v15
+    image: etumoses/custom:1.0.0
     deploy:
       restart_policy:
         condition: on-failure
@@ -11,7 +11,7 @@ services:
       - logs:/home/frappe/frappe-bench/logs
 
   configurator:
-    image: 89neuron/erpnext_hrms_payments:v15
+    image: etumoses/custom:1.0.0
     deploy:
       restart_policy:
         condition: none
@@ -39,7 +39,7 @@ services:
       - logs:/home/frappe/frappe-bench/logs
 
   create-site:
-    image: 89neuron/erpnext_hrms_payments:v15
+    image: etumoses/custom:1.0.0
     deploy:
       restart_policy:
         condition: none
@@ -91,7 +91,7 @@ services:
       - db-data:/var/lib/mysql
 
   frontend:
-    image: 89neuron/erpnext_hrms_payments:v15
+    image: etumoses/custom:1.0.0
     deploy:
       restart_policy:
         condition: on-failure
@@ -114,7 +114,7 @@ services:
       - "8080:8080"    
 
   queue-long:
-    image: 89neuron/erpnext_hrms_payments:v15
+    image: etumoses/custom:1.0.0
     deploy:
       restart_policy:
         condition: on-failure
@@ -128,7 +128,7 @@ services:
       - logs:/home/frappe/frappe-bench/logs
 
   queue-short:
-    image: 89neuron/erpnext_hrms_payments:v15
+    image: etumoses/custom:1.0.0
     deploy:
       restart_policy:
         condition: on-failure
@@ -159,7 +159,7 @@ services:
       - redis-cache-data:/data
 
   scheduler:
-    image: 89neuron/erpnext_hrms_payments:v15
+    image: etumoses/custom:1.0.0
     deploy:
       restart_policy:
         condition: on-failure
@@ -172,7 +172,7 @@ services:
       - logs:/home/frappe/frappe-bench/logs
 
   websocket:
-    image: 89neuron/erpnext_hrms_payments:v15
+    image: etumoses/custom:1.0.0
     deploy:
       restart_policy:
         condition: on-failure
