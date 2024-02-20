@@ -34,5 +34,9 @@
     {
     "url": "https://github.com/finbyz/whatsapp_erpnext.git",
     "branch": "version-15"
+  },
+    {
+    "url": "bench get-app https://github.com/The-Commit-Company/Raven.git",
+    "branch": "develop"
   }
 ]
