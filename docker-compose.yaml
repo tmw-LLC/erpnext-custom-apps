@@ -70,6 +70,7 @@ services:
         bench new-site --no-mariadb-socket --admin-password=admin --db-root-password=admin --install-app erpnext --set-default frontend;
         bench --site frontend install-app hrms;
         bench --site frontend install-app payments;
+        bench --site frontend install-app frappe_ura_efris-ug;
         bench --site frontend install-app education;
         bench --site frontend install-app lending;
         bench --site frontend install-app health;
