@@ -2,7 +2,7 @@ version: "3"
 
 services:
   backend:
-    image: etumoses/custom:1.1.0
+    image: etumoses/frappe_edu:v15
     deploy:
       restart_policy:
         condition: on-failure
@@ -11,7 +11,7 @@ services:
       - logs:/home/frappe/frappe-bench/logs
 
   configurator:
-    image: etumoses/custom:1.1.0
+    image: etumoses/frappe_edu:v15
     deploy:
       restart_policy:
         condition: none
@@ -39,7 +39,7 @@ services:
       - logs:/home/frappe/frappe-bench/logs
 
   create-site:
-    image: etumoses/custom:1.1.0
+    image: etumoses/frappe_edu:v15
     deploy:
       restart_policy:
         condition: none
@@ -69,16 +69,11 @@ services:
         echo "sites/common_site_config.json found";
         bench new-site --no-mariadb-socket --admin-password=admin --db-root-password=admin --install-app erpnext --set-default frontend;
         bench --site frontend install-app hrms;
-        bench --site frontend install-app payments;
-        bench --site frontend install-app ura_efris;
         bench --site frontend install-app education;
-        bench --site frontend install-app lending;
-        bench --site frontend install-app health;
-        bench --site frontend install-app Raven;
-        bench --site frontend install-app whatsapp_erpnext;
+        bench --site frontend install-app payments;
 
   db:
-    image: mariadb:11.2
+    image: mariadb:10.6
     healthcheck:
       test: mysqladmin ping -h localhost --password=admin
       interval: 1s
@@ -97,13 +92,14 @@ services:
       - db-data:/var/lib/mysql
 
   frontend:
-    image: etumoses/custom:1.1.0
+    image: etumoses/frappe_edu:v15
+    depends_on:
+      - websocket
     deploy:
       restart_policy:
         condition: on-failure
-    command: 
+    command:
       - nginx-entrypoint.sh
-
     environment:
       BACKEND: backend:8000
       FRAPPE_SITE_NAME_HEADER: frontend
@@ -117,10 +113,10 @@ services:
       - sites:/home/frappe/frappe-bench/sites
       - logs:/home/frappe/frappe-bench/logs
     ports:
-      - "8080:8080"    
+      - "8080:8080"
 
   queue-long:
-    image: etumoses/custom:1.1.0
+    image: etumoses/frappe_edu:v15
     deploy:
       restart_policy:
         condition: on-failure
@@ -134,11 +130,10 @@ services:
       - logs:/home/frappe/frappe-bench/logs
 
   queue-short:
-    image: etumoses/custom:1.1.0
+    image: etumoses/frappe_edu:v15
     deploy:
       restart_policy:
         condition: on-failure
-    depends_on: ["backend"]      
     command:
       - bench
       - worker
@@ -165,11 +160,10 @@ services:
       - redis-cache-data:/data
 
   scheduler:
-    image: etumoses/custom:1.0.0
+    image: etumoses/frappe_edu:v15
     deploy:
       restart_policy:
         condition: on-failure
-    depends_on: ["backend"]      
     command:
       - bench
       - schedule
@@ -178,7 +172,7 @@ services:
       - logs:/home/frappe/frappe-bench/logs
 
   websocket:
-    image: etumoses/custom:1.1.0
+    image: etumoses/frappe_edu:v15
     deploy:
       restart_policy:
         condition: on-failure
